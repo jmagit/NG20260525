@@ -3,13 +3,13 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "schematicCollections": ["angular-eslint"]
+    "schematicCollections": [ "angular-eslint" ]
   },
   "newProjectRoot": "projects",
   "projects": {
     "curso": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": { },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -25,7 +25,14 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css"]
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ],
+            "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/styles.css"
+            ]
           },
           "configurations": {
             "production": {
@@ -75,7 +82,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [ "src/**/*.ts", "src/**/*.html" ]
           }
         }
       }
