@@ -424,7 +424,7 @@ export class Header {
   }
 
   actualizaMenu() {
-    this.menu.set(generaMenu(this.auth))
+    this.menu.set(generaMenu())
   }
 }
 ```
