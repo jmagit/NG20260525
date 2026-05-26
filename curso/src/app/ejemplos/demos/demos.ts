@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, computed, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { LoggerService } from '@my/library';
 import { Unsubscribable } from 'rxjs';
 import { NotificationService, NotificationType } from 'src/app/common-services';
@@ -15,6 +15,22 @@ export class Demos implements OnInit, OnDestroy {
   private suscriptor: Unsubscribable | undefined;
   private log = inject(LoggerService)
 
+  readonly nombre = signal<string>('mundo')
+  readonly fontSize = signal<number>(24)
+  readonly listado = signal([
+    { id: 1, nombre: 'Madrid'},
+    { id: 2, nombre: 'barcelona'},
+    { id: 3, nombre: 'SEVILLA'},
+    { id: 4, nombre: 'ciudad Real'},
+  ])
+  readonly total = computed(() => this.listado().length)
+  readonly idProvincia = signal<number>(24)
+  public fecha = new Date('2026-05-26')
+
+  readonly resultado = signal<string>('')
+  readonly visible = signal<boolean>(true)
+  readonly estetica = signal({importante: true, error: false, urgente: true})
+
   constructor(public vm: NotificationService) {
     // this.log.error('esto es un error')
     // this.log.warn('esto es un warn')
@@ -26,6 +42,32 @@ export class Demos implements OnInit, OnDestroy {
     //     this.vm.remove(this.vm.Listado().length - 1);
     //   }
     // })
+  }
+
+  saluda() {
+    this.resultado.set(`Hola ${this.nombre()}`)
+  }
+
+  despide() {
+    this.resultado.set(`Adios ${this.nombre()}`)
+  }
+
+  di(algo: string) {
+    this.resultado.set(`Dice ${algo}`)
+  }
+
+  cambia() {
+    this.visible.update(value => !value)
+    this.estetica.update(value => ({...value, importante: !value.importante, error: !value.error}))
+  }
+
+  calculo(a:number, b: number) { return a + b }
+
+  add(provincia: string) {
+    if(!provincia) return
+    const id = this.listado()[this.listado().length - 1].id + 1
+    this.listado.update(value => [...value, {id, nombre: provincia}])
+    this.idProvincia.set(id)
   }
 
   ngOnInit(): void {
