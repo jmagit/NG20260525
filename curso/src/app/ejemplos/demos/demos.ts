@@ -6,6 +6,7 @@ import { LoggerService } from '@my/library';
   imports: [],
   templateUrl: './demos.html',
   styleUrl: './demos.css',
+  // providers: [LoggerService]
 })
 export class Demos {
   private log = inject(LoggerService)
