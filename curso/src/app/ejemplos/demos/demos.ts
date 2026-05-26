@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LoggerService } from '@my/library';
 
 @Component({
   selector: 'app-demos',
@@ -6,4 +7,13 @@ import { Component } from '@angular/core';
   templateUrl: './demos.html',
   styleUrl: './demos.css',
 })
-export class Demos {}
+export class Demos {
+  private log = inject(LoggerService)
+
+  constructor() {
+    this.log.error('esto es un error')
+    this.log.warn('esto es un warn')
+    this.log.info('esto es un info')
+    this.log.log('esto es un log')
+  }
+}

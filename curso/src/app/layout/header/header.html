@@ -2,7 +2,7 @@
 <header class="m-2 p2">
   @for(item of menu(); track $index) {
     @if(item.visible) {
-      <a class="p-2"[routerLink]="item.path"><i [class]="item.icono"></i> {{item.texto}}</a>
+      <a class="p-2" [routerLink]="item.path"><i [class]="item.icono"></i> {{item.texto}}</a>
     }
   }
 </header>
