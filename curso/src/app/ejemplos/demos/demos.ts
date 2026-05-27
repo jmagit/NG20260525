@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, computed, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { LoggerService } from '@my/library';
 import { Unsubscribable } from 'rxjs';
