@@ -14,7 +14,8 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
-    "baseUrl": "./",
+    "rootDir": "./",
+    // "baseUrl": "./",
     "paths": {
       "@my/library": ["src/lib/my-library/index.ts"]
     }

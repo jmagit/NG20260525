@@ -5,15 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { CapitalizePipe, ElipsisPipe, LoggerService, Sizer } from '@my/library';
 import { Unsubscribable } from 'rxjs';
 import { NotificationService, NotificationType } from 'src/app/common-services';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Notification } from "src/app/layout";
 import GraficoSvg from '../grafico-svg/grafico-svg';
 import { Card, FormButtons } from 'src/app/common-component';
+import { Calculadora } from '../calculadora/calculadora';
 
 @Component({
   selector: 'app-demos',
-  imports: [Notification, FormsModule, CommonModule,
+  imports: [/*Notification,*/ FormsModule, CommonModule,
     ElipsisPipe, CapitalizePipe, Sizer, GraficoSvg,
-    Card, FormButtons],
+    Card, FormButtons, Calculadora],
   templateUrl: './demos.html',
   styleUrl: './demos.css',
   // providers: [LoggerService, NotificationService,]
@@ -96,4 +98,27 @@ export class Demos implements OnInit, OnDestroy {
       this.suscriptor.unsubscribe();
     }
   }
+
+
+  idiomas = signal([
+    { codigo: 'en-US', region: 'USA' },
+    { codigo: 'es', region: 'España' },
+    { codigo: 'pt', region: 'Portugal' },
+  ]).asReadonly();
+  idioma = signal(this.idiomas()[0].codigo);
+  calculos = signal<Calculo[]>([]);
+  valCalculadora = signal(666);
+
+  ponResultado(origen: string, valor: number) {
+    this.calculos.update(value => [ ...value, {
+      pos: this.calculos.length + 1,
+      origen,
+      valor: +valor
+    }]);
+  }
+}
+interface Calculo {
+  pos: number
+  origen: string
+  valor: number
 }
