@@ -25,7 +25,14 @@ export class Demos implements OnInit, OnDestroy {
   ])
   readonly total = computed(() => this.listado().length)
   readonly idProvincia = signal<number>(24)
+
   public fecha = new Date('2026-05-26')
+  public get Fecha() : string { return this.fecha.toISOString().substring(0,10) }
+  public set Fecha(valor : string) {
+    const f = new Date(valor)
+    if(f.toString() === "Invalid Date" || f === this.fecha) return
+    this.fecha = f
+  }
 
   readonly resultado = signal<string>('')
   readonly visible = signal<boolean>(true)
