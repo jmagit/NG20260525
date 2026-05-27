@@ -1,7 +1,81 @@
+<h1>Hola {{ nombre() | elipsis:15 | uppercase}}</h1>
 <!-- <app-notification /> -->
 <p>
-  <input type="button" value="Error" (click)="vm.add('Esto es una notificación de error')" >
-  <input type="button" value="Warn" (click)="vm.add('Esta notificación es un aviso', vm.NotificationType.warn)" >
-  <input type="button" value="Info" (click)="vm.add('Solo una notificación informativa', vm.NotificationType.info)" >
-  <input type="button" value="Log" (click)="vm.add('Para trazar con notificaciones', vm.NotificationType.log)" >
+  <input type="text" [(ngModel)]="nombre" />
+  <input type="button" value="saluda" (click)="saluda()" />
+  <input type="button" value="despide" (click)="despide()" />
+  <button type="button" (click)="di('algo')">Di algo</button>
+  <button type="button" (click)="cambia()" [textContent]="'cambia'"></button>
+
+  <input type="button" value="Error" (click)="vm.add('Esto es una notificación de error')" />
+  <input
+    type="button"
+    value="Warn"
+    (click)="vm.add('Esta notificación es un aviso', vm.NotificationType.warn)"
+  />
+  <input
+    type="button"
+    value="Info"
+    (click)="vm.add('Solo una notificación informativa', vm.NotificationType.info)"
+  />
+  <input
+    type="button"
+    value="Log"
+    (click)="vm.add('Para trazar con notificaciones', vm.NotificationType.log)"
+  />
 </p>
+
+<p [textContent]="resultado()">Esto se pierde</p>
+<p [innerHTML]="resultado()">Esto se pierde</p>
+
+<p [hidden]="!visible()">Ahora me ves</p>
+@if (visible()) {
+  <p>Ahora existo</p>
+}
+
+<p [class]="estetica()">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore eos odit obcaecati libero
+  voluptatibus vitae magni! Eius provident hic, assumenda soluta iusto fugiat, tempora quos
+  voluptates eos, saepe sint pariatur?
+</p>
+<p [class.semi-visible]="!visible()">Ahora me ves bien</p>
+
+<p>Fecha: {{ Fecha | date:'dd/MMM/yyyy'}} <input type="date" [(ngModel)]="Fecha" ></p>
+
+
+
+<p>Calcula: 2 + 2 = {{ (2 + 2) | number:'4.2-2'}} = {{ calculo(2, 2) | currency:'EUR':'symbol':'1.2-2' }}</p>
+
+<ul>
+  @for (item of listado() | slice:-5; track item.id) {
+    <li [style.background-color]="$odd ? 'lightskyblue' : 'lightcyan'">
+      {{ item.nombre | titlecase }} ({{ item.id }}) [Elemento {{ $index + 1 }} de {{ $count }}]
+    </li>
+  } @empty {
+    <li>No hay provincias que mostrar</li>
+  }
+</ul>
+<p><b>Total:</b> {{ total() }}</p>
+
+<p>
+  <select [(ngModel)]="idProvincia">
+    <option value="">--Elige opción--</option>
+    @for (p of listado(); track p.id) {
+      <option [value]="p.id">{{ p.nombre | capitalize}}</option>
+    }
+  </select>
+  Seleccionado: {{idProvincia()}}
+  <input type="text" value="Tabarnia" #txtProvincia/>
+  <input type="button" value="add" (click)="add(txtProvincia.value)" />
+</p>
+
+<my-sizer [(size)]="fontSize">Esto no se ve</my-sizer>
+<app-card [header]="'Depuracion ' + fontSize()">
+<p [style.font-size.px]="fontSize()">
+  {{listado() | json}}
+</p>
+</app-card>
+
+<app-form-buttons (send)="saluda()" (cancel)="saluda()"/>
+
+<app-grafico-svg />

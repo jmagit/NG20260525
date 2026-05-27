@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ElipsisPipe implements PipeTransform {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  transform(value: any, maxlen: number): any {
+  transform(value: any, maxlen?: number): any {
     return (!maxlen || maxlen < 2 || !value || value.length <= maxlen)
       ? value : (value.substr(0, maxlen - 1) + '\u2026');
   }

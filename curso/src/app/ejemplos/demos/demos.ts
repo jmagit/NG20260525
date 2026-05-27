@@ -1,13 +1,19 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, computed, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
-import { LoggerService } from '@my/library';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CapitalizePipe, ElipsisPipe, LoggerService, Sizer } from '@my/library';
 import { Unsubscribable } from 'rxjs';
 import { NotificationService, NotificationType } from 'src/app/common-services';
 import { Notification } from "src/app/layout";
+import GraficoSvg from '../grafico-svg/grafico-svg';
+import { Card, FormButtons } from 'src/app/common-component';
 
 @Component({
   selector: 'app-demos',
-  imports: [Notification],
+  imports: [Notification, FormsModule, CommonModule,
+    ElipsisPipe, CapitalizePipe, Sizer, GraficoSvg,
+    Card, FormButtons],
   templateUrl: './demos.html',
   styleUrl: './demos.css',
   // providers: [LoggerService, NotificationService,]
@@ -25,7 +31,7 @@ export class Demos implements OnInit, OnDestroy {
     { id: 4, nombre: 'ciudad Real'},
   ])
   readonly total = computed(() => this.listado().length)
-  readonly idProvincia = signal<number>(24)
+  readonly idProvincia = signal<number>(2)
 
   public fecha = new Date('2026-05-26')
   public get Fecha() : string { return this.fecha.toISOString().substring(0,10) }
