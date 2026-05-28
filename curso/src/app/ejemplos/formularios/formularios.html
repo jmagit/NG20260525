@@ -1,1 +1,46 @@
-<p>formularios works!</p>
+<p>
+  <input type="button" value="add" (click)="vm.add()" />
+  <input type="number" value="0" #key />
+  <input type="button" value="edit" (click)="vm.edit(+key.value)" />
+</p>
+<form name="miForm" #miForm="ngForm">
+  <div>
+    <label for="id">código:</label>
+    <input type="number" name="id" id="id" [(ngModel)]="vm.Elemento().id" #id="ngModel" required min="0" >
+    <output class="error" [hidden]="!id.hasError('required')">Es obligatorio.</output>
+    <output class="error" [hidden]="!id.hasError('min')">El valor mínimo es 0.</output>
+  </div>
+  <div>
+    <label for="nombre">nombre:</label>
+    <input type="text" name="nombre" id="nombre" [(ngModel)]="vm.Elemento().nombre" #nombre="ngModel"
+      required maxlength="10" minlength="2">
+    <output class="error" [hidden]="nombre.valid || miForm.pristine">{{nombre.errors | errormsg }}</output>
+  </div>
+  <div>
+    <label for="apellidos">apellidos:</label>
+    <input type="text" name="apellidos" id="apellidos" [(ngModel)]="vm.Elemento().apellidos" #apellidos="ngModel"
+      maxlength="10" minlength="2">
+    <output class="error" [hidden]="apellidos.valid">{{apellidos.errors | errormsg }}</output>
+  </div>
+  <div>
+    <label for="edad">edad:</label>
+    <input type="number" name="edad" id="edad" [(ngModel)]="vm.Elemento().edad" #edad="ngModel" min="16" max="67">
+    <output class="error" [hidden]="edad.valid">{{edad.errors | errormsg }}</output>
+  </div>
+  <div>
+    <label for="telefono">teléfono:</label>
+    <input type="text" name="telefono" id="telefono" [(ngModel)]="vm.Elemento().telefono" #telefono="ngModel"
+      pattern="^\d{3} \d{3} \d{3}" >
+    <output class="error" [hidden]="telefono.valid">{{telefono.errors | errormsg:'Debe ser 999 999 999' }}</output>
+  </div>
+  <div>
+    <label for="correo">correo:</label>
+    <input type="email" name="correo" id="correo" [(ngModel)]="vm.Elemento().correo" #correo="ngModel"
+      email >
+    <output class="error" [hidden]="correo.valid">{{correo.errors | errormsg }}</output>
+  </div>
+  <div>
+    <input type="button" value="enviar" (click)="vm.send()" [disabled]="miForm.invalid"/>
+    <input type="button" value="volver" (click)="vm.cancel()" />
+  </div>
+</form>
