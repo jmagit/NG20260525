@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { Home, PageNotFound } from './layout';
 import { Calculadora, Demos, Formularios } from './ejemplos';
+import { LoginForm, RegisterUser } from './security';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', component: Home },
@@ -8,6 +9,9 @@ export const routes: Routes = [
   { path: 'demos', component: Demos },
   { path: 'chisme/de/hacer/numeros', component: Calculadora },
   { path: 'formularios', component: Formularios },
+
+  { path: 'login', component: LoginForm },
+  { path: 'registro', component: RegisterUser },
 
   { path: '404.html', component: PageNotFound },
   { path: '**', component: PageNotFound },

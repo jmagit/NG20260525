@@ -90,7 +90,6 @@ export function ajaxWaitInterceptor(req: HttpRequest<unknown>, next: HttpHandler
         100% { transform: rotate(360deg); }
       }
   `],
-    standalone: true,
 })
 export class AjaxWait {
   constructor(private srv: AjaxWaitService) { }
