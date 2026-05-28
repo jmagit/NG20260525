@@ -6,14 +6,18 @@
 <form name="miForm" #miForm="ngForm">
   <div>
     <label for="id">código:</label>
-    <input type="number" name="id" id="id" [(ngModel)]="vm.Elemento().id" #id="ngModel" required min="0" >
-    <output class="error" [hidden]="!id.hasError('required')">Es obligatorio.</output>
-    <output class="error" [hidden]="!id.hasError('min')">El valor mínimo es 0.</output>
+    @if(vm.Modo() === 'add') {
+      <input type="number" name="id" id="id" [(ngModel)]="vm.Elemento().id" #id="ngModel" required min="0" >
+      <output class="error" [hidden]="!id.hasError('required')">Es obligatorio.</output>
+      <output class="error" [hidden]="!id.hasError('min')">El valor mínimo es 0.</output>
+    } @else {
+      <output [textContent]="vm.Elemento().id"></output>
+    }
   </div>
   <div>
     <label for="nombre">nombre:</label>
     <input type="text" name="nombre" id="nombre" [(ngModel)]="vm.Elemento().nombre" #nombre="ngModel"
-      required maxlength="10" minlength="2">
+      notblank maxlength="10" minlength="2" uppercase>
     <output class="error" [hidden]="nombre.valid || miForm.pristine">{{nombre.errors | errormsg }}</output>
   </div>
   <div>
@@ -36,7 +40,7 @@
   <div>
     <label for="correo">correo:</label>
     <input type="email" name="correo" id="correo" [(ngModel)]="vm.Elemento().correo" #correo="ngModel"
-      email >
+       >
     <output class="error" [hidden]="correo.valid">{{correo.errors | errormsg }}</output>
   </div>
   <div>

@@ -1,6 +1,6 @@
 import { Component, Injectable, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ErrorMessagePipe } from '@my/library';
+import { ErrorMessagePipe, NIFNIEValidator, NotblankValidator, TypeValidator, UppercaseValidator } from '@my/library';
 import { NotificationService, NotificationType } from 'src/app/common-services';
 
 type Modo = 'add' | 'edit'
@@ -27,7 +27,7 @@ export class PersonasViewModel {
   }
 
   edit(key: number) {
-    this.Elemento.set({id: key, nombre: 'Pepitoooooooooooooooo', apellidos: 'Grillo', edad: 99, telefono: '555 123 456', correo: 'pgrillo@example.com'})
+    this.Elemento.set({id: key, nombre: 'Pepito', apellidos: 'Grillo', edad: 99, telefono: '555 123 456', correo: 'pgrillo@example.com'})
     this.Modo.set('edit')
   }
 
@@ -51,7 +51,7 @@ export class PersonasViewModel {
 }
 @Component({
   selector: 'app-formularios',
-  imports: [ FormsModule, ErrorMessagePipe, ],
+  imports: [ FormsModule, ErrorMessagePipe, NIFNIEValidator, NotblankValidator, UppercaseValidator, TypeValidator],
   templateUrl: './formularios.html',
   styleUrl: './formularios.css',
 })
