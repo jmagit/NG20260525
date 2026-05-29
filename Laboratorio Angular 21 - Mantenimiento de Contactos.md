@@ -203,7 +203,7 @@ Añadir el constructor e inyectar dependencias:
     protected notify: NotificationService,
     protected out: LoggerService,
     protected dao: ContactosDAOService,
-    // public auth: AuthService,
+    public auth: AuthService,
     protected router: Router
     // protected navigation: NavigationService
   ) { }

@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:ui": "ng test --ui",
     "lint": "ng lint"
   },
   "private": true,
@@ -30,6 +31,7 @@
     "@angular/compiler-cli": "^21.2.0",
     "@eslint/js": "^10.0.1",
     "@types/validator": "^13.15.10",
+    "@vitest/ui": "^4.1.7",
     "angular-eslint": "21.4.0",
     "eslint": "^10.3.0",
     "jsdom": "^28.0.0",

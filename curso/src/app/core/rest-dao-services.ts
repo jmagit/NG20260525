@@ -29,8 +29,17 @@ export abstract class RESTDAOService<T, K> {
   remove(id: K, extras = {}): Observable<T> {
     return this.http.delete<T>(`${this.baseUrl}/${id}`, Object.assign({}, this.option, extras));
   }
+  page(page: number, rows: number = 20, orderBy?: string): Observable<{ page: number, pages: number, rows: number, list: T[] }> {
+    return new Observable(subscriber => {
+      const url = `${this.baseUrl}?_page=${page}&_rows=${rows}${orderBy ? ('&_sort=' + orderBy) : ''}`
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.http.get<any>(url, this.option).subscribe({
+        next: data => subscriber.next({ page: data.number, pages: data.totalPages, rows: data.totalElements, list: data.content }),
+        error: err => subscriber.error(err)
+      })
+    })
+  }
 }
-
 export class DAOServiceMock<T, K> extends RESTDAOService<T, K> {
   private readonly pk: string
   private readonly listado: T[]
@@ -72,6 +81,10 @@ export class DAOServiceMock<T, K> extends RESTDAOService<T, K> {
     this.listado.splice(index, 1)
     return of(item);
   }
+  override page(page: number, _rows: number = 20, _orderBy?: string): Observable<{ page: number, pages: number, rows: number, list: T[] }> {
+    return of({ page, pages: 1, rows: this.listado.length, list: this.listado });
+  }
+
   private findIndex(id: K) {
     return this.listado.findIndex(item => (item as Record<string, unknown>)[this.pk] == id)
   }

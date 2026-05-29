@@ -13,7 +13,7 @@ export const routes: Routes = [
   { path: 'demos', component: Demos },
   { path: 'chisme/de/hacer/numeros', component: Calculadora, title: 'Calculadora' },
   { path: 'formularios', component: Formularios },
-  { path: 'formularios/:id', component: Formularios, canActivate: [ AuthCanActivate ] },
+  { path: 'formularios/:id', component: Formularios, canActivate: [AuthCanActivate] },
   // {
   //   path: 'clientes', children: [
   //     { path: '', component: Home },
@@ -24,7 +24,10 @@ export const routes: Routes = [
   //   ]
   // },
 
-  { matcher: graficoFiles, loadComponent: () => import('./ejemplos/grafico-svg/grafico-svg'), canActivate: [AuthWithRedirectCanActivate('/login')]},
+  { path: 'contactos', loadChildren: () => import('./contactos/contactos-module').then(mod => mod.routes) },
+  { path: 'alysia/baxendale', redirectTo: '/contactos/43' },
+
+  { matcher: graficoFiles, loadComponent: () => import('./ejemplos/grafico-svg/grafico-svg'), canActivate: [AuthWithRedirectCanActivate('/login')] },
   { path: 'config', loadChildren: () => import('./config/config-module').then(mod => mod.routes) },
 
   { path: 'login', component: LoginForm },
@@ -40,12 +43,16 @@ export function generaMenu(auth: AuthService): Option[] {
     { texto: 'Demos', icono: 'fa-solid fa-person-chalkboard', path: '/demos', visible: true },
     { texto: 'Calculadora', icono: 'fa-solid fa-calculator', path: '/chisme/de/hacer/numeros', visible: true },
     { texto: 'Formularios', icono: 'fa-solid fa-chalkboard-user', path: '/formularios', visible: auth.isAuthenticated() },
+    { texto: 'Contactos', icono: 'fa-solid fa-address-book', path: '/contactos', visible: true },
+    { texto: 'Alysia', icono: 'fa-solid fa-address-book', path: '/alysia/baxendale', visible: true },
     { texto: 'Foto', icono: 'fa-solid fa-image', path: '/foto.svg', visible: true },
-    { texto: 'config', icono: 'fa-solid fa-gears', visible: auth.isAuthenticated(), children: [
-      { texto: 'config', icono: 'fa-solid fa-gears', path: '/config', visible: true},
-      { texto: 'perfil', icono: 'fa-solid fa-user-pen', path: '/config/perfil', visible: true, separado: true },
-      { texto: 'Permisos', icono: 'fa-solid fa-screwdriver-wrench', path: '/config/permisos', visible: true },
-    ] },
+    {
+      texto: 'config', icono: 'fa-solid fa-gears', visible: auth.isAuthenticated(), children: [
+        { texto: 'config', icono: 'fa-solid fa-gears', path: '/config', visible: true },
+        { texto: 'perfil', icono: 'fa-solid fa-user-pen', path: '/config/perfil', visible: true, separado: true },
+        { texto: 'Permisos', icono: 'fa-solid fa-screwdriver-wrench', path: '/config/permisos', visible: true },
+      ]
+    },
     { texto: 'Falla', icono: 'fa-solid fa-ban', path: '/desconocido', visible: true },
   ]
 }
