@@ -15,9 +15,9 @@
     "target": "ES2022",
     "module": "preserve",
     "rootDir": "./",
-    // "baseUrl": "./",
+    "baseUrl": "./",
     "paths": {
-      "@my/library": ["src/lib/my-library/index.ts"]
+      "@my/library": ["src/lib/my-library"]
     }
 
   },

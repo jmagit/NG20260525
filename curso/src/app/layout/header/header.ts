@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { generaMenu, Option, } from '../../app.routes';
-import { Login } from "src/app/security";
+import { AuthService, Login } from "src/app/security";
 
 @Component({
   selector: 'app-header',
@@ -12,11 +12,11 @@ import { Login } from "src/app/security";
 export class Header {
   menu = signal<Option[]>([])
 
-  constructor() {
+  constructor(private auth: AuthService) {
     this.actualizaMenu()
   }
 
   actualizaMenu() {
-    this.menu.set(generaMenu())
+    this.menu.set(generaMenu(this.auth))
   }
 }
