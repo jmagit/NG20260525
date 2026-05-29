@@ -34,15 +34,18 @@ export const routes: Routes = [
   { path: '**', redirectTo: '/404.html' },
 ];
 
-export function generaMenu(_auth: AuthService): Option[] {
+export function generaMenu(auth: AuthService): Option[] {
   return [
     { texto: 'Inicio', icono: 'fa-solid fa-house', path: '/inicio', visible: true },
     { texto: 'Demos', icono: 'fa-solid fa-person-chalkboard', path: '/demos', visible: true },
     { texto: 'Calculadora', icono: 'fa-solid fa-calculator', path: '/chisme/de/hacer/numeros', visible: true },
-    { texto: 'Formularios', icono: 'fa-solid fa-chalkboard-user', path: '/formularios', visible: true },
+    { texto: 'Formularios', icono: 'fa-solid fa-chalkboard-user', path: '/formularios', visible: auth.isAuthenticated() },
     { texto: 'Foto', icono: 'fa-solid fa-image', path: '/foto.svg', visible: true },
-    { texto: 'config', icono: 'fa-solid fa-gears', path: '/config', visible: true },
-    { texto: 'perfil', icono: 'fa-solid fa-user-pen', path: '/config/perfil', visible: true },
+    { texto: 'config', icono: 'fa-solid fa-gears', visible: auth.isAuthenticated(), children: [
+      { texto: 'config', icono: 'fa-solid fa-gears', path: '/config', visible: true},
+      { texto: 'perfil', icono: 'fa-solid fa-user-pen', path: '/config/perfil', visible: true, separado: true },
+      { texto: 'Permisos', icono: 'fa-solid fa-screwdriver-wrench', path: '/config/permisos', visible: true },
+    ] },
     { texto: 'Falla', icono: 'fa-solid fa-ban', path: '/desconocido', visible: true },
   ]
 }

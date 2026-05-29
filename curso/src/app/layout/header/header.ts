@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { generaMenu, Option, } from '../../app.routes';
 import { AuthService, Login } from "src/app/security";
@@ -14,6 +14,10 @@ export class Header {
 
   constructor(private auth: AuthService) {
     this.actualizaMenu()
+    effect(() => {
+      auth.isAuthenticated()
+      this.actualizaMenu()
+    })
   }
 
   actualizaMenu() {

@@ -1,5 +1,5 @@
 import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { ActivatedRouteSnapshot, BaseRouteReuseStrategy, provideRouter, RouteReuseStrategy, withComponentInputBinding, withRouterConfig } from '@angular/router';
 
 // Cargar idioma
 import { registerLocaleData } from '@angular/common';
@@ -14,10 +14,16 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptor
 import { ajaxWaitInterceptor } from './layout';
 import { AuthInterceptor } from './security';
 
+class NotRouteReuseStrategy extends BaseRouteReuseStrategy {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  override shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean { return false; }
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
+    {provide: RouteReuseStrategy, useClass: NotRouteReuseStrategy},
     // LoggerService,
     {provide: ERROR_LEVEL, useValue: environment.ERROR_LEVEL},
     { provide: LOCALE_ID, useValue: 'es-ES' }, // Establecer idioma por defecto,
