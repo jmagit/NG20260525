@@ -1,5 +1,5 @@
 import { HttpContext } from '@angular/common/http';
-import { Component, Injectable, signal } from '@angular/core';
+import { Component, effect, Injectable, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ErrorMessagePipe, NIFNIEValidator, NotblankValidator, TypeValidator, UppercaseValidator } from '@my/library';
 import { NotificationService, NotificationType } from 'src/app/common-services';
@@ -80,5 +80,12 @@ export class PersonasViewModel {
   styleUrl: './formularios.css',
 })
 export class Formularios {
-  constructor(public vm: PersonasViewModel) {}
+  readonly id = input<number>()
+  constructor(public vm: PersonasViewModel) {
+    effect(() => {
+      if(this.id() !== undefined) {
+        vm.edit(+(this.id()??0))
+      }
+    })
+  }
 }

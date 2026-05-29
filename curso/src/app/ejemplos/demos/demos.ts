@@ -4,18 +4,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CapitalizePipe, ElipsisPipe, LoggerService, Sizer } from '@my/library';
 import { Unsubscribable } from 'rxjs';
-import { NotificationService, NotificationType } from 'src/app/common-services';
+import { NavigationService, NotificationService, NotificationType } from 'src/app/common-services';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Notification } from "src/app/layout";
-import GraficoSvg from '../grafico-svg/grafico-svg';
 import { Card, FormButtons } from 'src/app/common-component';
 import { Calculadora } from '../calculadora/calculadora';
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-demos',
   imports: [/*Notification,*/ FormsModule, CommonModule,
-    ElipsisPipe, CapitalizePipe, Sizer, GraficoSvg,
-    Card, FormButtons, Calculadora],
+    ElipsisPipe, CapitalizePipe, Sizer,
+    Card, FormButtons, Calculadora, RouterLink],
   templateUrl: './demos.html',
   styleUrl: './demos.css',
   // providers: [LoggerService, NotificationService,]
@@ -23,6 +23,8 @@ import { Calculadora } from '../calculadora/calculadora';
 export class Demos implements OnInit, OnDestroy {
   private suscriptor: Unsubscribable | undefined;
   private log = inject(LoggerService)
+  private router = inject(Router)
+  private navigation = inject(NavigationService)
 
   readonly nombre = signal<string>('mundo')
   readonly fontSize = signal<number>(24)
@@ -62,6 +64,8 @@ export class Demos implements OnInit, OnDestroy {
 
   saluda() {
     this.resultado.set(`Hola ${this.nombre()}`)
+    // this.router.navigateByUrl('/inicio')
+    this.navigation.back()
   }
 
   despide() {

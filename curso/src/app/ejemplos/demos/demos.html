@@ -1,4 +1,4 @@
-<h1>Hola {{ nombre() | elipsis:15 | uppercase}}</h1>
+<h1>Hola {{ nombre() | elipsis: 15 | uppercase }}</h1>
 <!-- <app-notification /> -->
 <div class="container theme-dark">
   <div class="row">
@@ -15,20 +15,22 @@
       </thead>
       <tfoot>
         <tr>
-          <td colspan="3">Idioma: <select [(ngModel)]="idioma">
+          <td colspan="3">
+            Idioma:
+            <select [(ngModel)]="idioma">
               @for (i of idiomas(); track i.codigo) {
-                <option [value]="i.codigo">{{i.region}}</option>
+                <option [value]="i.codigo">{{ i.region }}</option>
               }
             </select>
           </td>
         </tr>
       </tfoot>
       <tbody>
-        @for (r of calculos() | slice:-10; track r) {
+        @for (r of calculos() | slice: -10; track r) {
           <tr>
-            <td class="text-right">{{r.pos}}</td>
-            <td>{{r.origen}}</td>
-            <td class="text-right">{{r.valor | number:'1.0-8':idioma() }}</td>
+            <td class="text-right">{{ r.pos }}</td>
+            <td>{{ r.origen }}</td>
+            <td class="text-right">{{ r.valor | number: '1.0-8' : idioma() }}</td>
           </tr>
         }
       </tbody>
@@ -38,7 +40,7 @@
     </div>
   </div>
   <div class="row">
-    <input type="number" [(ngModel)]="valCalculadora">
+    <input type="number" [(ngModel)]="valCalculadora" />
   </div>
 </div>
 <p>
@@ -81,14 +83,15 @@
 </p>
 <p [class.semi-visible]="!visible()">Ahora me ves bien</p>
 
-<p>Fecha: {{ Fecha | date:'dd/MMM/yyyy'}} <input type="date" [(ngModel)]="Fecha" ></p>
+<p>Fecha: {{ Fecha | date: 'dd/MMM/yyyy' }} <input type="date" [(ngModel)]="Fecha" /></p>
 
-
-
-<p>Calcula: 2 + 2 = {{ (2 + 2) | number:'4.2-2'}} = {{ calculo(2, 2) | currency:'EUR':'symbol':'1.2-2' }}</p>
+<p>
+  Calcula: 2 + 2 = {{ 2 + 2 | number: '4.2-2' }} =
+  {{ calculo(2, 2) | currency: 'EUR' : 'symbol' : '1.2-2' }}
+</p>
 
 <ul>
-  @for (item of listado() | slice:-5; track item.id) {
+  @for (item of listado() | slice: -5; track item.id) {
     <li [style.background-color]="$odd ? 'lightskyblue' : 'lightcyan'">
       {{ item.nombre | titlecase }} ({{ item.id }}) [Elemento {{ $index + 1 }} de {{ $count }}]
     </li>
@@ -102,21 +105,26 @@
   <select [(ngModel)]="idProvincia">
     <option value="">--Elige opción--</option>
     @for (p of listado(); track p.id) {
-      <option [value]="p.id">{{ p.nombre | capitalize}}</option>
+      <option [value]="p.id">{{ p.nombre | capitalize }}</option>
     }
   </select>
-  Seleccionado: {{idProvincia()}}
-  <input type="text" value="Tabarnia" #txtProvincia/>
+  Seleccionado: {{ idProvincia() }}
+  <input type="text" value="Tabarnia" #txtProvincia />
   <input type="button" value="add" (click)="add(txtProvincia.value)" />
 </p>
 
 <my-sizer [(size)]="fontSize">Esto no se ve</my-sizer>
 <app-card [header]="'Depuracion ' + fontSize()">
-<p [style.font-size.px]="fontSize()">
-  {{listado() | json}}
-</p>
+  <p [style.font-size.px]="fontSize()">
+    {{ listado() | json }}
+  </p>
 </app-card>
 
-<app-form-buttons (send)="saluda()" (cancel)="saluda()"/>
-
-<!-- <app-grafico-svg /> -->
+<app-form-buttons (send)="saluda()" (cancel)="saluda()" />
+<p>
+  <a routerLink="/foto.svg">foto</a> |
+  <a [routerLink]="['/', 'foto.svg']">otra foto</a> |
+  <a routerLink="foto.svg">ruta anidada</a> |
+  <a href="/inicio">con href</a>
+  <input type="button" value="form" routerLink="/formularios/2" />
+</p>
