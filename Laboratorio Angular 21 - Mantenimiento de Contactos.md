@@ -453,7 +453,7 @@ export class ContactosView implements OnChanges {
 
 Guardar el fichero `src/app/contactos/componentes.ts` con los cambios realizados.
 
-Crear el fichero `src/app/core/index.ts`, editar y añadir:
+Crear el fichero `src/app/contactos/index.ts`, editar y añadir:
 
 ```ts
 export * from './servicios';
