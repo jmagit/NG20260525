@@ -1,5 +1,5 @@
 import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { ActivatedRouteSnapshot, BaseRouteReuseStrategy, provideRouter, RouteReuseStrategy, withComponentInputBinding, withRouterConfig } from '@angular/router';
+import { ActivatedRouteSnapshot, BaseRouteReuseStrategy, provideRouter, RouteReuseStrategy, withComponentInputBinding } from '@angular/router';
 
 // Cargar idioma
 import { registerLocaleData } from '@angular/common';

@@ -1,0 +1,14 @@
+<h1>Libro</h1>
+@if(VM.Elemento()) {
+  <p>
+    <b>id:</b> {{VM.Elemento().idLibro}}<br>
+    <b>titulo:</b> {{VM.Elemento().titulo}}<br>
+    <b>autor:</b> {{VM.Elemento().autor}}<br>
+  </p>
+  <p>
+    <button class="btn btn-success" [routerLink]="['edit']"><i class="fas fa-pen"></i> Editar</button>
+    <input class="btn btn-secondary" type="button" value="Volver" (click)="VM.cancel()">
+  </p>
+} @else {
+  <h2>Sin datos</h2>
+}

@@ -32,6 +32,9 @@
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
+            ],
+            "allowedCommonJsDependencies": [
+              "validator/lib/isIBAN"
             ]
           },
           "configurations": {
@@ -44,7 +47,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
+                  "maximumWarning": "5kB",
                   "maximumError": "8kB"
                 }
               ],

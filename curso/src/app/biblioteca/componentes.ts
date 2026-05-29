@@ -3,20 +3,20 @@ import { Component, OnChanges, OnDestroy, SimpleChanges, OnInit, input } from '@
 import { FormsModule } from '@angular/forms';
 import { RouterLink, ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ContactosViewModelService } from './servicios';
+import { LibrosViewModelService } from './servicios';
 import { TypeValidator, ErrorMessagePipe } from 'src/lib/my-library';
 import { Paginator, FormButtons } from '../common-component';
 
 @Component({
-    selector: 'app-contactos-list',
+    selector: 'app-libros-list',
     templateUrl: './tmpl-list.html',
     styleUrls: ['./componentes.css'],
     imports: [RouterLink, Paginator]
 })
-export class ContactosList implements OnChanges, OnDestroy {
+export class LibrosList implements OnChanges, OnDestroy {
   readonly page = input(0);
 
-  constructor(public VM: ContactosViewModelService) { }
+  constructor(public VM: LibrosViewModelService) { }
 
   ngOnChanges(_changes: SimpleChanges): void {
     this.VM.load(this.page())
@@ -26,13 +26,13 @@ export class ContactosList implements OnChanges, OnDestroy {
 }
 
 @Component({
-    selector: 'app-contactos-add',
+    selector: 'app-libros-add',
     templateUrl: './tmpl-form.html',
     styleUrls: ['./componentes.css'],
     imports: [FormsModule, TypeValidator, ErrorMessagePipe, FormButtons]
 })
-export class ContactosAdd implements OnInit {
-  constructor(public VM: ContactosViewModelService) { }
+export class LibrosAdd implements OnInit {
+  constructor(public VM: LibrosViewModelService) { }
 
   ngOnInit(): void {
     this.VM.add();
@@ -40,15 +40,15 @@ export class ContactosAdd implements OnInit {
 }
 
 @Component({
-    selector: 'app-contactos-edit',
+    selector: 'app-libros-edit',
     templateUrl: './tmpl-form.html',
     styleUrls: ['./componentes.css'],
     imports: [FormsModule, TypeValidator, ErrorMessagePipe, FormButtons]
 })
-export class ContactosEdit implements OnInit, OnDestroy {
+export class LibrosEdit implements OnInit, OnDestroy {
   private obs$?: Subscription;
 
-  constructor(public VM: ContactosViewModelService,
+  constructor(public VM: LibrosViewModelService,
     protected route: ActivatedRoute, protected router: Router) { }
 
   ngOnInit(): void {
@@ -68,15 +68,15 @@ export class ContactosEdit implements OnInit, OnDestroy {
 }
 
 @Component({
-    selector: 'app-contactos-view',
+    selector: 'app-libros-view',
     templateUrl: './tmpl-view.html',
     styleUrls: ['./componentes.css'],
-    imports: [DatePipe]
+    imports: [DatePipe, RouterLink]
 })
-export class ContactosView implements OnChanges {
+export class LibrosView implements OnChanges {
   readonly id = input<string>();
 
-  constructor(public VM: ContactosViewModelService, protected router: Router) { }
+  constructor(public VM: LibrosViewModelService, protected router: Router) { }
 
   ngOnChanges(_changes: SimpleChanges): void {
     const id = this.id();

@@ -1,8 +1,8 @@
 import { HttpContext } from '@angular/common/http';
 import { Component, effect, Injectable, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ErrorMessagePipe, NIFNIEValidator, NotblankValidator, TypeValidator, UppercaseValidator } from '@my/library';
-import { NotificationService, NotificationType } from 'src/app/common-services';
+import { ErrorMessagePipe, NotblankValidator, TypeValidator, UppercaseValidator } from '@my/library';
+import { NotificationService } from 'src/app/common-services';
 import { RESTDAOService } from 'src/app/core';
 import { AUTH_REQUIRED } from 'src/app/security';
 
@@ -75,7 +75,7 @@ export class PersonasViewModel {
 }
 @Component({
   selector: 'app-formularios',
-  imports: [ FormsModule, ErrorMessagePipe, NIFNIEValidator, NotblankValidator, UppercaseValidator, TypeValidator],
+  imports: [ FormsModule, ErrorMessagePipe, NotblankValidator, UppercaseValidator, TypeValidator],
   templateUrl: './formularios.html',
   styleUrl: './formularios.css',
 })
