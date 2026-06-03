@@ -71,7 +71,7 @@ export class LibrosEdit implements OnInit, OnDestroy {
     selector: 'app-libros-view',
     templateUrl: './tmpl-view.html',
     styleUrls: ['./componentes.css'],
-    imports: [DatePipe, RouterLink]
+    imports: [RouterLink]
 })
 export class LibrosView implements OnChanges {
   readonly id = input<string>();

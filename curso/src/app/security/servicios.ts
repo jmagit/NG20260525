@@ -45,7 +45,7 @@ export class AuthService {
     this.name = name;
     this.roles = roles;
     if (this.storage) {
-      this.storage['AuthService'] = JSON.stringify({ isAuth: this.isAuth, authToken, refreshToken, name, roles });
+      this.storage['AuthService'] = JSON.stringify({ isAuth: this.isAuth(), authToken: this.authToken, refreshToken, name, roles });
     }
     this.eventBus.emit(LOGIN_EVENT)
   }

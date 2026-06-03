@@ -7,7 +7,7 @@
       <output class="d-block" [textContent]="VM.Elemento().idLibro"></output>
     </div>
   }
-  <div class="form-floating col-md-4">
+  <div class="form-floating col-md-10">
     <input class="form-control" [class.is-invalid]="titulo.invalid" type="text" name="titulo" id="titulo"
        [(ngModel)]="VM.Elemento().titulo" #titulo="ngModel" required minlength="2"
        maxlength="50" placeholder=" ">
@@ -20,6 +20,30 @@
        maxlength="50" placeholder=" ">
     <label for="autor">Autor:</label>
     <output class="invalid-feedback" [hidden]="autor.valid">{{autor.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-4">
+    <input class="form-control" [class.is-invalid]="pais.invalid" type="text" name="pais" id="pais"
+      [(ngModel)]="VM.Elemento().pais" #pais="ngModel" placeholder="pais" minlength="2">
+    <label for="pais">pais:</label>
+    <output class="invalid-feedback" [hidden]="pais.valid">{{pais.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-2">
+    <input class="form-control" [class.is-invalid]="fecha.invalid" type="number" name="fecha" id="fecha"
+      [(ngModel)]="VM.Elemento().fecha" #fecha="ngModel" placeholder="fecha">
+    <label for="fecha">año:</label>
+    <output class="invalid-feedback" [hidden]="fecha.valid">{{fecha.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-2">
+    <input class="form-control" [class.is-invalid]="paginas.invalid" type="number" name="paginas" id="paginas"
+      [(ngModel)]="VM.Elemento().paginas" #paginas="ngModel" placeholder="paginas" min="1">
+    <label for="paginas">páginas:</label>
+    <output class="invalid-feedback" [hidden]="paginas.valid">{{paginas.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating">
+    <input class="form-control" [class.is-invalid]="wiki.invalid" type="url" name="wiki" id="wiki"
+      [(ngModel)]="VM.Elemento().wiki" #wiki="ngModel" placeholder="wiki">
+    <label for="wiki">wiki:</label>
+    <output class="invalid-feedback" [hidden]="wiki.valid">{{wiki.errors | errormsg}}</output>
   </div>
   <!-- <div class="form-floating col-md-4">
     <input class="form-control" [class.is-invalid]="numPag.invalid" type="number" name="numPag" id="numPag"
