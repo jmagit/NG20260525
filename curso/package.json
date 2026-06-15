@@ -13,12 +13,12 @@
   "private": true,
   "packageManager": "npm@11.14.1",
   "dependencies": {
-    "@angular/common": "^21.2.0",
+    "@angular/common": "^22.0.1",
     "@angular/compiler": "^21.2.0",
-    "@angular/core": "^21.2.0",
-    "@angular/forms": "^21.2.0",
-    "@angular/platform-browser": "^21.2.0",
-    "@angular/router": "^21.2.0",
+    "@angular/core": "^22.0.1",
+    "@angular/forms": "^22.0.1",
+    "@angular/platform-browser": "^22.0.1",
+    "@angular/router": "^22.0.1",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "bootstrap": "^5.3.8",
     "rxjs": "~7.8.0",
@@ -26,7 +26,7 @@
     "validator": "^13.15.35"
   },
   "devDependencies": {
-    "@angular/build": "^21.2.13",
+    "@angular/build": "^22.0.1",
     "@angular/cli": "^21.2.13",
     "@angular/compiler-cli": "^21.2.0",
     "@eslint/js": "^10.0.1",
